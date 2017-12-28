@@ -1,0 +1,7 @@
+.is-danger{
+	border-color:red;
+}
+.is-danger-text{
+	color:red;
+	font-size:10pt;
+}
