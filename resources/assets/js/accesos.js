@@ -4,14 +4,16 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+window.onbeforeunload = function (e) {
+    document.getElementById("DivAccesos").style.display="none"; 
+    document.getElementById("DivSpiner").style.display="block"; 
+}
 require('./bootstrap');
 // window.Vue = require('vue');
 import Vue from 'vue'
 import axios from 'axios'
 import Vuetify from 'vuetify'
 Vue.use(Vuetify)
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -32,6 +34,10 @@ var vu = new Vue({
             {text: 'Login', value: 'usrUserName'},
             {text: 'Perfíl', value: 'des_perfil'}
         ]
+    },
+    mounted: function () {
+        document.getElementById("DivSpiner").style.display="none"; 
+        document.getElementById("DivAccesos").style.display="block"; 
     },
     methods: {
         EligeAcceso:function(row){

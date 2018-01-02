@@ -3,6 +3,10 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+window.onbeforeunload = function (e) {
+	document.getElementById("divApp").style.display="none"; 
+	document.getElementById("divSpiner").style.display="block"; 
+}
 require('./bootstrap');
 // window.Vue = require('vue');
 import jquery from 'jquery'
@@ -33,8 +37,6 @@ var app = new Vue({
           (v) => !!v || 'Campo requerido.',
           (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Ingrese una dirección de E-mail valida.'
         ],
-		// toggle : false,
-		// terror : false,
 		FormLogin:{
 			usrUserName : '',
 			usrPassword : '',
@@ -45,6 +47,10 @@ var app = new Vue({
 		},
 		errors: []
 	}, 
+    mounted: function () { 
+		document.getElementById("divSpiner").style.display="none"; 
+		document.getElementById("divApp").style.display="block"; 
+    },
 	methods:{
 		toggleLogin:function(){
 			$(".divForm").toggle("slow");

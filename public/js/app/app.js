@@ -16268,7 +16268,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
         })();
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-}(__webpack_require__(40)));
+}(__webpack_require__(39)));
 
 
 /***/ }),
@@ -64801,6 +64801,15 @@ function unbind(el, binding) {
 /* 39 */
 /***/ (function(module, exports) {
 
+module.exports = function() {
+	throw new Error("define cannot be used indirect");
+};
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports) {
+
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -64904,15 +64913,6 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports) {
-
-module.exports = function() {
-	throw new Error("define cannot be used indirect");
-};
 
 
 /***/ }),
@@ -76581,7 +76581,7 @@ return zhTw;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(161);
-module.exports = __webpack_require__(180);
+module.exports = __webpack_require__(177);
 
 
 /***/ }),
@@ -76590,25 +76590,27 @@ module.exports = __webpack_require__(180);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_toastr__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_toastr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vuetify__);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuetify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_toastr__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+window.onbeforeunload = function (e) {
+  document.getElementById("divSpiner").style.display = "none";
+  document.getElementById("divApp").style.display = "block";
+};
 __webpack_require__(14);
 // window.Vue = require('vue');
 
@@ -76617,21 +76619,17 @@ __webpack_require__(14);
 
 
 
-
-__WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_vuetify___default.a);
-
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuetify___default.a);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('usuario', __webpack_require__(163));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('password', __webpack_require__(171));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('perfil', __webpack_require__(174));
 
-__WEBPACK_IMPORTED_MODULE_2_vue___default.a.component('idea', __webpack_require__(163));
-__WEBPACK_IMPORTED_MODULE_2_vue___default.a.component('usuario', __webpack_require__(166));
-__WEBPACK_IMPORTED_MODULE_2_vue___default.a.component('password', __webpack_require__(174));
-__WEBPACK_IMPORTED_MODULE_2_vue___default.a.component('perfil', __webpack_require__(177));
-
-var app = new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#divPrincipal',
   created: function created() {
     window.addEventListener('beforeunload', this.onbeforeunload);
@@ -76642,6 +76640,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
     });
   },
   mounted: function mounted() {
+    document.getElementById("divSpiner").style.display = "none";
+    document.getElementById("divApp").style.display = "block";
     this.CerrarSesion();
   },
 
@@ -76681,7 +76681,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
       this.salir = 0;
     },
     Salir: function Salir() {
-      __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post("/logout", this.FormLogout).then(function (response) {
+      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post("/logout", this.FormLogout).then(function (response) {
         window.location.href = "/";
       });
     }
@@ -76953,201 +76953,15 @@ webpackContext.id = 162;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(39)
-/* script */
-var __vue_script__ = __webpack_require__(164)
-/* template */
-var __vue_template__ = __webpack_require__(165)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Idea.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3ecce7a4", Component.options)
-  } else {
-    hotAPI.reload("data-v-3ecce7a4", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 164 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            ideas: []
-        };
-    },
-
-    created: function created() {
-        this.getIdeas();
-        console.log("cargado el componente");
-    },
-    methods: {
-        getIdeas: function getIdeas() {
-            var _this = this;
-
-            var urlIdeas = 'mis-ideas';
-            axios.get(urlIdeas).then(function (response) {
-                _this.ideas = response.data;
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 165 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("h2", { staticClass: "text-center" }, [_vm._v("Captura tus ideas")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "well" }, [
-      _c("form", [
-        _c(
-          "div",
-          { staticClass: "input-group" },
-          [
-            _c("v-text-field", { attrs: { label: "¿En que estas pensando?" } }),
-            _vm._v(" "),
-            _vm._m(0)
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "list-unstyled" },
-        _vm._l(_vm.ideas, function(idea) {
-          return _c("li", [
-            _c("p", [
-              _c("small", { staticClass: "text-muted" }, [
-                _c("em", [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(idea.created_at) +
-                      "\n                        "
-                  )
-                ])
-              ]),
-              _vm._v(
-                "\n                    " +
-                  _vm._s(idea.description) +
-                  "\n                "
-              )
-            ])
-          ])
-        })
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-btn" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn--round theme--dark primary",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Agregar")]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3ecce7a4", module.exports)
-  }
-}
-
-/***/ }),
-/* 166 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(167)
+  __webpack_require__(164)
 }
-var normalizeComponent = __webpack_require__(39)
+var normalizeComponent = __webpack_require__(40)
 /* script */
-var __vue_script__ = __webpack_require__(172)
+var __vue_script__ = __webpack_require__(169)
 /* template */
-var __vue_template__ = __webpack_require__(173)
+var __vue_template__ = __webpack_require__(170)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -77186,17 +77000,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 167 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(168);
+var content = __webpack_require__(165);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(170)("38de2455", content, false);
+var update = __webpack_require__(167)("38de2455", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -77212,10 +77026,10 @@ if(false) {
 }
 
 /***/ }),
-/* 168 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(169)(undefined);
+exports = module.exports = __webpack_require__(166)(undefined);
 // imports
 
 
@@ -77226,7 +77040,7 @@ exports.push([module.i, "\ntable.table tbody td:first-child, table.table tbody t
 
 
 /***/ }),
-/* 169 */
+/* 166 */
 /***/ (function(module, exports) {
 
 /*
@@ -77308,7 +77122,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 170 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -77327,7 +77141,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(171)
+var listToStyles = __webpack_require__(168)
 
 /*
 type StyleObject = {
@@ -77529,7 +77343,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 171 */
+/* 168 */
 /***/ (function(module, exports) {
 
 /**
@@ -77562,7 +77376,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 172 */
+/* 169 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78046,7 +77860,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 });
 
 /***/ }),
-/* 173 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78094,29 +77908,7 @@ var render = function() {
                           [
                             _c(
                               "v-flex",
-                              { attrs: { xs12: "" } },
-                              [
-                                _c(
-                                  "v-btn",
-                                  {
-                                    staticStyle: { float: "right" },
-                                    attrs: {
-                                      round: "",
-                                      xs2: "",
-                                      color: "primary",
-                                      dark: ""
-                                    },
-                                    on: { click: _vm.toggleF }
-                                  },
-                                  [_vm._v("Agregar")]
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-flex",
-                              { attrs: { xs6: "", md6: "", xl4: "" } },
+                              { attrs: { xs12: "", md6: "", xl6: "" } },
                               [
                                 _c("v-text-field", {
                                   attrs: {
@@ -78133,6 +77925,27 @@ var render = function() {
                                     expression: "search"
                                   }
                                 })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-flex",
+                              { attrs: { xs12: "", md6: "", xl6: "" } },
+                              [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticStyle: { float: "right" },
+                                    attrs: {
+                                      round: "",
+                                      color: "primary",
+                                      dark: ""
+                                    },
+                                    on: { click: _vm.toggleF }
+                                  },
+                                  [_vm._v("Agregar")]
+                                )
                               ],
                               1
                             )
@@ -79075,15 +78888,15 @@ if (false) {
 }
 
 /***/ }),
-/* 174 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(39)
+var normalizeComponent = __webpack_require__(40)
 /* script */
-var __vue_script__ = __webpack_require__(175)
+var __vue_script__ = __webpack_require__(172)
 /* template */
-var __vue_template__ = __webpack_require__(176)
+var __vue_template__ = __webpack_require__(173)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79122,7 +78935,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 175 */
+/* 172 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79220,7 +79033,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 176 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79391,15 +79204,15 @@ if (false) {
 }
 
 /***/ }),
-/* 177 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(39)
+var normalizeComponent = __webpack_require__(40)
 /* script */
-var __vue_script__ = __webpack_require__(178)
+var __vue_script__ = __webpack_require__(175)
 /* template */
-var __vue_template__ = __webpack_require__(179)
+var __vue_template__ = __webpack_require__(176)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79438,7 +79251,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 178 */
+/* 175 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79447,14 +79260,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -79698,7 +79503,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 179 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79732,383 +79537,80 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-flex",
-            { attrs: { xs12: "", sm12: "", md12: "" } },
+            "v-layout",
+            { attrs: { row: "", wrap: "" } },
             [
               _c(
-                "v-layout",
-                { attrs: { row: "", wrap: "" } },
+                "v-flex",
+                { attrs: { xs12: "", sm12: "", md8: "" } },
                 [
                   _c(
-                    "v-flex",
-                    { attrs: { "d-flex": "", xs12: "", sm12: "", md8: "" } },
-                    [
-                      _c(
-                        "v-form",
-                        {
-                          ref: "formP",
-                          attrs: { "lazy-validation": "" },
-                          model: {
-                            value: _vm.validP,
-                            callback: function($$v) {
-                              _vm.validP = $$v
-                            },
-                            expression: "validP"
-                          }
+                    "v-form",
+                    {
+                      ref: "formP",
+                      attrs: { "lazy-validation": "" },
+                      model: {
+                        value: _vm.validP,
+                        callback: function($$v) {
+                          _vm.validP = $$v
                         },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.FormPerfil._token,
-                                expression: "FormPerfil._token"
-                              }
-                            ],
-                            attrs: {
-                              type: "hidden",
-                              value: "{!! csrf_token() !!}"
-                            },
-                            domProps: { value: _vm.FormPerfil._token },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.FormPerfil,
-                                  "_token",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.FormPerfil.idUser,
-                                expression: "FormPerfil.idUser"
-                              }
-                            ],
-                            attrs: { type: "hidden" },
-                            domProps: { value: _vm.FormPerfil.idUser },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.FormPerfil,
-                                  "idUser",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { row: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs10: "",
-                                    "offset-xs1": "",
-                                    md6: "",
-                                    "offset-md3": ""
-                                  }
-                                },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: { label: "Login", disabled: "" },
-                                    model: {
-                                      value: _vm.FormPerfil.usrUserName,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.FormPerfil,
-                                          "usrUserName",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "FormPerfil.usrUserName"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { row: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs10: "",
-                                    "offset-xs1": "",
-                                    md6: "",
-                                    "offset-md3": ""
-                                  }
-                                },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      label: "Nombres",
-                                      rules: _vm.ReglaInput,
-                                      disabled: _vm.disabled,
-                                      required: ""
-                                    },
-                                    model: {
-                                      value: _vm.FormPerfil.usrNombreFull,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.FormPerfil,
-                                          "usrNombreFull",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "FormPerfil.usrNombreFull"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { row: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs10: "",
-                                    "offset-xs1": "",
-                                    md6: "",
-                                    "offset-md3": ""
-                                  }
-                                },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      label: "Email",
-                                      rules: _vm.ReglaEmail,
-                                      disabled: _vm.disabled,
-                                      required: ""
-                                    },
-                                    model: {
-                                      value: _vm.FormPerfil.usrEmail,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.FormPerfil,
-                                          "usrEmail",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "FormPerfil.usrEmail"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { row: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs10: "",
-                                    "offset-xs1": "",
-                                    md6: "",
-                                    "offset-md3": ""
-                                  }
-                                },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      label: "Última visita",
-                                      disabled: ""
-                                    },
-                                    model: {
-                                      value: _vm.FormPerfil.usrUltimaVisita,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.FormPerfil,
-                                          "usrUltimaVisita",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "FormPerfil.usrUltimaVisita"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { row: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs10: "",
-                                    "offset-xs1": "",
-                                    md6: "",
-                                    "offset-md3": ""
-                                  }
-                                },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      label: "Fecha de creación",
-                                      disabled: ""
-                                    },
-                                    model: {
-                                      value: _vm.FormPerfil.auCreadoEl,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.FormPerfil,
-                                          "auCreadoEl",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "FormPerfil.auCreadoEl"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { row: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs8: "",
-                                    "offset-xs4": "",
-                                    md8: "",
-                                    "offset-md4": ""
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "show",
-                                          rawName: "v-show",
-                                          value: _vm.ButonEditar,
-                                          expression: "ButonEditar"
-                                        }
-                                      ],
-                                      attrs: {
-                                        round: "",
-                                        color: "primary",
-                                        dark: ""
-                                      },
-                                      on: { click: _vm.habilitarCampos }
-                                    },
-                                    [_vm._v("modificar")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "show",
-                                          rawName: "v-show",
-                                          value: !_vm.ButonEditar,
-                                          expression: "!ButonEditar"
-                                        }
-                                      ],
-                                      attrs: {
-                                        round: "",
-                                        color: "primary",
-                                        dark: "",
-                                        disabled: !_vm.validP
-                                      },
-                                      on: { click: _vm.editarPerfil }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                guardar\n              "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "show",
-                                          rawName: "v-show",
-                                          value: !_vm.ButonEditar,
-                                          expression: "!ButonEditar"
-                                        }
-                                      ],
-                                      attrs: {
-                                        round: "",
-                                        outline: "",
-                                        color: "primary"
-                                      },
-                                      on: { click: _vm.inhabilitarCampos }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                cancelar\n              "
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm12: "", md4: "" } },
+                        expression: "validP"
+                      }
+                    },
                     [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.FormPerfil._token,
+                            expression: "FormPerfil._token"
+                          }
+                        ],
+                        attrs: {
+                          type: "hidden",
+                          value: "{!! csrf_token() !!}"
+                        },
+                        domProps: { value: _vm.FormPerfil._token },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.FormPerfil,
+                              "_token",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.FormPerfil.idUser,
+                            expression: "FormPerfil.idUser"
+                          }
+                        ],
+                        attrs: { type: "hidden" },
+                        domProps: { value: _vm.FormPerfil.idUser },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.FormPerfil,
+                              "idUser",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
                       _c(
                         "v-layout",
                         { attrs: { row: "" } },
@@ -80117,76 +79619,23 @@ var render = function() {
                             "v-flex",
                             {
                               attrs: {
-                                xs12: "",
-                                "offset-xs3": "",
-                                md12: "",
-                                "offset-md1": ""
+                                xs10: "",
+                                "offset-xs1": "",
+                                md6: "",
+                                "offset-md3": ""
                               }
                             },
                             [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.FormPerfil.idUser,
-                                    expression: "FormPerfil.idUser"
-                                  }
-                                ],
-                                attrs: { type: "hidden" },
-                                domProps: { value: _vm.FormPerfil.idUser },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.FormPerfil,
-                                      "idUser",
-                                      $event.target.value
-                                    )
-                                  }
+                              _c("v-text-field", {
+                                attrs: { label: "Login", disabled: "" },
+                                model: {
+                                  value: _vm.FormPerfil.usrUserName,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.FormPerfil, "usrUserName", $$v)
+                                  },
+                                  expression: "FormPerfil.usrUserName"
                                 }
-                              }),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.FormPerfil.usrUrlimage,
-                                    expression: "FormPerfil.usrUrlimage"
-                                  }
-                                ],
-                                attrs: { type: "hidden" },
-                                domProps: { value: _vm.FormPerfil.usrUrlimage },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.FormPerfil,
-                                      "usrUrlimage",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "v-avatar",
-                                { attrs: { size: "120px", tile: _vm.tile } },
-                                [
-                                  _c("img", {
-                                    staticClass: "avatar",
-                                    attrs: {
-                                      src: _vm.FormPerfil.image,
-                                      alt: ""
-                                    }
-                                  })
-                                ]
-                              )
+                              })
                             ],
                             1
                           )
@@ -80194,7 +79643,154 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("p"),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            {
+                              attrs: {
+                                xs10: "",
+                                "offset-xs1": "",
+                                md6: "",
+                                "offset-md3": ""
+                              }
+                            },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Nombres",
+                                  rules: _vm.ReglaInput,
+                                  disabled: _vm.disabled,
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.FormPerfil.usrNombreFull,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.FormPerfil,
+                                      "usrNombreFull",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "FormPerfil.usrNombreFull"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            {
+                              attrs: {
+                                xs10: "",
+                                "offset-xs1": "",
+                                md6: "",
+                                "offset-md3": ""
+                              }
+                            },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Email",
+                                  rules: _vm.ReglaEmail,
+                                  disabled: _vm.disabled,
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.FormPerfil.usrEmail,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.FormPerfil, "usrEmail", $$v)
+                                  },
+                                  expression: "FormPerfil.usrEmail"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            {
+                              attrs: {
+                                xs10: "",
+                                "offset-xs1": "",
+                                md6: "",
+                                "offset-md3": ""
+                              }
+                            },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Última visita", disabled: "" },
+                                model: {
+                                  value: _vm.FormPerfil.usrUltimaVisita,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.FormPerfil,
+                                      "usrUltimaVisita",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "FormPerfil.usrUltimaVisita"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            {
+                              attrs: {
+                                xs10: "",
+                                "offset-xs1": "",
+                                md6: "",
+                                "offset-md3": ""
+                              }
+                            },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Fecha de creación",
+                                  disabled: ""
+                                },
+                                model: {
+                                  value: _vm.FormPerfil.auCreadoEl,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.FormPerfil, "auCreadoEl", $$v)
+                                  },
+                                  expression: "FormPerfil.auCreadoEl"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
                         "v-layout",
@@ -80205,70 +79801,225 @@ var render = function() {
                             {
                               attrs: {
                                 xs8: "",
-                                "offset-xs3": "",
-                                md12: "",
-                                "offset-md1": ""
-                              }
-                            },
-                            [
-                              _c("input", {
-                                staticClass: "form-control",
-                                attrs: { type: "file" },
-                                on: { change: _vm.onFileChange }
-                              })
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("p"),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            {
-                              attrs: {
-                                xs12: "",
-                                "offset-xs1": "",
-                                md12: "",
-                                "offset-md1": ""
+                                "offset-xs4": "",
+                                md8: "",
+                                "offset-md4": ""
                               }
                             },
                             [
                               _c(
                                 "v-btn",
                                 {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: _vm.ButonEditar,
+                                      expression: "ButonEditar"
+                                    }
+                                  ],
                                   attrs: {
                                     round: "",
                                     color: "primary",
                                     dark: ""
                                   },
-                                  on: { click: _vm.cargarImagen }
+                                  on: { click: _vm.habilitarCampos }
                                 },
-                                [_vm._v("cargar")]
+                                [_vm._v("modificar")]
                               ),
                               _vm._v(" "),
                               _c(
                                 "v-btn",
                                 {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: !_vm.ButonEditar,
+                                      expression: "!ButonEditar"
+                                    }
+                                  ],
+                                  attrs: {
+                                    round: "",
+                                    color: "primary",
+                                    dark: "",
+                                    disabled: !_vm.validP
+                                  },
+                                  on: { click: _vm.editarPerfil }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n              guardar\n            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: !_vm.ButonEditar,
+                                      expression: "!ButonEditar"
+                                    }
+                                  ],
                                   attrs: {
                                     round: "",
                                     outline: "",
                                     color: "primary"
                                   },
-                                  on: { click: _vm.borrarImagen }
+                                  on: { click: _vm.inhabilitarCampos }
                                 },
-                                [_vm._v("eliminar")]
+                                [
+                                  _vm._v(
+                                    "\n              cancelar\n            "
+                                  )
+                                ]
                               )
                             ],
                             1
                           )
                         ],
                         1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", sm12: "", md4: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    {
+                      attrs: {
+                        xs12: "",
+                        "offset-xs3": "",
+                        md12: "",
+                        "offset-md1": ""
+                      }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.FormPerfil.idUser,
+                            expression: "FormPerfil.idUser"
+                          }
+                        ],
+                        attrs: { type: "hidden" },
+                        domProps: { value: _vm.FormPerfil.idUser },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.FormPerfil,
+                              "idUser",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.FormPerfil.usrUrlimage,
+                            expression: "FormPerfil.usrUrlimage"
+                          }
+                        ],
+                        attrs: { type: "hidden" },
+                        domProps: { value: _vm.FormPerfil.usrUrlimage },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.FormPerfil,
+                              "usrUrlimage",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "v-avatar",
+                        { attrs: { size: "120px", tile: _vm.tile } },
+                        [
+                          _c("img", {
+                            staticClass: "avatar",
+                            attrs: { src: _vm.FormPerfil.image, alt: "" }
+                          })
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("p"),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    {
+                      attrs: {
+                        xs12: "",
+                        "offset-xs3": "",
+                        md12: "",
+                        "offset-md1": ""
+                      }
+                    },
+                    [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: { type: "file" },
+                        on: { change: _vm.onFileChange }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("p"),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    {
+                      attrs: {
+                        xs12: "",
+                        "offset-xs3": "",
+                        md12: "",
+                        "offset-md1": ""
+                      }
+                    },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { round: "", color: "primary", dark: "" },
+                          on: { click: _vm.cargarImagen }
+                        },
+                        [_vm._v("cargar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { round: "", outline: "", color: "primary" },
+                          on: { click: _vm.borrarImagen }
+                        },
+                        [_vm._v("eliminar")]
                       )
                     ],
                     1
@@ -80297,7 +80048,7 @@ if (false) {
 }
 
 /***/ }),
-/* 180 */
+/* 177 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

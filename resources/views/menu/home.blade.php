@@ -293,7 +293,7 @@
 	    @default
 	        {{"Perfíl no encontrado"}}
 	        <script Language="Javascript">
-	            Salir();
+	            app.Salir();
 	        </script>
 	    @endswitch
 </div>

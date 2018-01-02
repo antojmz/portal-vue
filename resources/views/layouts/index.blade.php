@@ -15,17 +15,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     	<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    	{!! Html::style('css/app.css') !!}
+		<link href="{{ asset('css/app.css') }}" rel="stylesheet">    	
 	</head>
-	<body>
-		<div id="divLogin">
-			<v-app style="background: #666 !important;">
-				<v-container>
-	     			@yield('content')
-				</v-container>
-			</v-app>
-		</div>
-    	<script src="{{ asset('js/login/login.js') }}"></script>
+	<body>		
+	<div id="divLogin" style="position:relative;z-index:1;">	
+		<v-app style="background: #666">
+			<v-container id="divSpiner" fluid fill-height style="position:absolute;z-index:2;">
+				<v-layout justify-center align-center>
+					<v-progress-circular indeterminate color="indigo lighten-4"></v-progress-circular>
+				</v-layout>
+			</v-container>
+			<v-container id="divApp" fluid fill-height style="display:none;position:relative;z-index:1;">
+     			@yield('content')		
+			</v-container>
+		</v-app>
+	</div>
+	<script src="{{ asset('js/login/login.js') }}"></script>
 	</body>
 </html>
 

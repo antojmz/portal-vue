@@ -15,12 +15,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     	<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    	{!! Html::style('css/app.css') !!}
+		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 		<script src="{{ asset('js/utils/utils.js') }}"></script>
 	</head>
 	<body>
-		<div id="divPrincipal">
-			<v-app id="inspire">
+		<div id="divPrincipal" style="position:relative;z-index:1;">
+			<div id="divSpiner">
+				<br>
+				<v-container fluid fill-height style="position:absolute;z-index:3;">
+					<v-layout justify-center align-center>
+						<v-progress-circular indeterminate color="indigo lighten-4"></v-progress-circular>
+					</v-layout>
+				</v-container>
+			</div>
+			<v-app id="divApp" style="display:none;position:relative;z-index:2;">
 				<v-navigation-drawer fixed clipped v-model="drawer" app dark>
 					<v-list dense>
 				        <template v-for="(item, i) in menu_sidebar">
@@ -35,7 +43,7 @@
 										</v-list-tile-title>
 									</v-list-tile-content>
 					            </v-list-tile>
-				            	<v-list-tile v-for="(child, i) in item.children" :key="i" :href="child.href" v-on:click="cambiarSalir">
+				            	<v-list-tile v-for="(child, i) in item.children" :key="i" :href="child.href">
 				                	<v-list-tile-action v-if="child.icon">
 				                		<v-icon>@{{ child.icon }}</v-icon>
 				              		</v-list-tile-action>
@@ -76,64 +84,64 @@
 									(strlen($avatarUser) > 10) ? $avatar=$avatarUser : $avatar="img/default.png";
 								@endphp
 						        <v-avatar size="32px" :tile="tile">
-						        	<img class="avatar" src="{{ asset($avatar) }}" alt="">
+						        	<img class="avatar" width="32" height="32" src="{{ asset($avatar) }}" alt="">
 						        </v-avatar>
                       		</v-btn>
-	                        <v-list style="background-color:#4F34B2">
-                        		<br>
-                        		<h2 style="color:white" class="text-xs-center">
-                        			@php echo Auth::user()->usrNombreFull; @endphp
-                        		</h2>
-                        		<h4 style="color:white" class="text-xs-center">
-									@php echo Auth::user()->usrEmail; @endphp
-                        		</h4>
-                        		<br>
-	                        </v-list>
-	                        <v-list>
-								<v-list-tile href="{{ route('perfil') }}">
-	                                <v-list-tile-action>
-				                		<v-icon>face</v-icon>
-				              		</v-list-tile-action>
-	                                <v-list-tile-title>
-	                                	<span>Mi perfíl</span>
-	                                </v-list-tile-title>
-	                            </v-list-tile>
-								<v-list-tile href="{{ route('password') }}">
-	                                <v-list-tile-action>
-				                		<v-icon>settings_backup_restore</v-icon>
-				              		</v-list-tile-action>
-	                                <v-list-tile-title>
-	                                	<span>Cambiar contraseña</span>
-	                                </v-list-tile-title>
-	                            </v-list-tile>
-            					@php
-									$nroPerfiles = Session::get('nroPerfiles');
-								@endphp
-								@if (isset($nroPerfiles))
-									@if ($nroPerfiles>1)
-										<v-list-tile href="{{ route('accesos') }}">
-			                                <v-list-tile-action>
-						                		<v-icon>autorenew</v-icon>
-						              		</v-list-tile-action>
-			                                <v-list-tile-title>
-			                                	<span>Cambio de acceso</span>
-			                                </v-list-tile-title>
-			                            </v-list-tile>
+	                        <div style="width:250px;">
+		                        <v-list style="background-color:#7986CB;">
+	                        		<h2 style="color:white" class="text-xs-center">
+	                        			@php echo Auth::user()->usrNombreFull; @endphp
+	                        		</h2>
+	                        		<h4 style="color:white" class="text-xs-center">
+										@php echo Auth::user()->usrEmail; @endphp
+	                        		</h4>
+		                        </v-list>
+		                        <v-list>
+									<v-list-tile href="{{ route('perfil') }}">
+		                                <v-list-tile-action>
+					                		<v-icon>face</v-icon>
+					              		</v-list-tile-action>
+		                                <v-list-tile-title>
+		                                	<span>Mi perfíl</span>
+		                                </v-list-tile-title>
+		                            </v-list-tile>
+									<v-list-tile href="{{ route('password') }}">
+		                                <v-list-tile-action>
+					                		<v-icon>settings_backup_restore</v-icon>
+					              		</v-list-tile-action>
+		                                <v-list-tile-title>
+		                                	<span>Cambiar contraseña</span>
+		                                </v-list-tile-title>
+		                            </v-list-tile>
+	            					@php
+										$nroPerfiles = Session::get('nroPerfiles');
+									@endphp
+									@if (isset($nroPerfiles))
+										@if ($nroPerfiles>1)
+											<v-list-tile href="{{ route('accesos') }}">
+				                                <v-list-tile-action>
+							                		<v-icon>autorenew</v-icon>
+							              		</v-list-tile-action>
+				                                <v-list-tile-title>
+				                                	<span>Cambio de acceso</span>
+				                                </v-list-tile-title>
+				                            </v-list-tile>
+										@endif
 									@endif
-								@endif
-	                        	<v-list-tile href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-	                                <v-list-tile-action>
-				                		<v-icon>input</v-icon>
-				              		</v-list-tile-action>
-	                                <v-list-tile-title>
-	                                	<span>Salir</span>
-	                                </v-list-tile-title>
-	                            </v-list-tile>
-	                        </v-list>
+		                        	<v-list-tile href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+		                                <v-list-tile-action>
+					                		<v-icon>input</v-icon>
+					              		</v-list-tile-action>
+		                                <v-list-tile-title>
+		                                	<span>Salir</span>
+		                                </v-list-tile-title>
+		                            </v-list-tile>
+		                        </v-list>
+	                        </div>
                         </v-menu>
 				</v-toolbar>
 				<v-content>
-					<v-container>
+					<v-container fluid fill-height>
 						<v-layout justify-center align-center>
 		         			@yield('content')
 						</v-layout>

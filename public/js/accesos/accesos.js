@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 183);
+/******/ 	return __webpack_require__(__webpack_require__.s = 180);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -20069,15 +20069,15 @@ function isSlowBuffer (obj) {
 
 /***/ }),
 
-/***/ 183:
+/***/ 180:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(184);
+module.exports = __webpack_require__(181);
 
 
 /***/ }),
 
-/***/ 184:
+/***/ 181:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20094,14 +20094,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+window.onbeforeunload = function (e) {
+    document.getElementById("DivAccesos").style.display = "none";
+    document.getElementById("DivSpiner").style.display = "block";
+};
 __webpack_require__(14);
 // window.Vue = require('vue');
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuetify___default.a);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -20118,6 +20120,10 @@ var vu = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         search: '',
         pagination: {},
         headers: [{ text: 'Nombres', value: 'usrNombreFull' }, { text: 'Login', value: 'usrUserName' }, { text: 'Perfíl', value: 'des_perfil' }]
+    },
+    mounted: function mounted() {
+        document.getElementById("DivSpiner").style.display = "none";
+        document.getElementById("DivAccesos").style.display = "block";
     },
     methods: {
         EligeAcceso: function EligeAcceso(row) {

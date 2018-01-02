@@ -12,11 +12,11 @@
           <v-flex xs12>
             <v-card>
               <v-card-title>
-                <v-flex xs12>
-                  <v-btn round xs2 color="primary" dark @click="toggleF" style="float: right;">Agregar</v-btn>
-                </v-flex>
-                <v-flex xs6 md6 xl4>
+                <v-flex xs12 md6 xl6>
                   <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
+                </v-flex>
+                <v-flex xs12 md6 xl6>
+                  <v-btn round color="primary" dark @click="toggleF" style="float:right;">Agregar</v-btn>
                 </v-flex>
               </v-card-title>
               <v-data-table :headers="headers" :items="listUsuarios" v-bind:search="search">

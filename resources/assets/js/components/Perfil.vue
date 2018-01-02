@@ -10,76 +10,68 @@
           </v-flex>
         </v-layout>
       </v-card-title>
-      <v-flex xs12 sm12 md12>
-        <v-layout row wrap>
-          <v-flex d-flex xs12 sm12 md8>              
-            <v-form  v-model="validP" ref="formP" lazy-validation>
-              <input type="hidden" v-model="FormPerfil._token" value="{!! csrf_token() !!}">
+      <v-layout row wrap>
+        <v-flex xs12 sm12 md8>              
+          <v-form  v-model="validP" ref="formP" lazy-validation>
+            <input type="hidden" v-model="FormPerfil._token" value="{!! csrf_token() !!}">
+            <input type="hidden" v-model="FormPerfil.idUser">
+            <v-layout row>
+              <v-flex xs10 offset-xs1 md6 offset-md3>
+                <v-text-field label="Login" v-model="FormPerfil.usrUserName" disabled></v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <v-flex xs10 offset-xs1 md6 offset-md3>
+                <v-text-field label="Nombres" v-model="FormPerfil.usrNombreFull" :rules="ReglaInput" :disabled="disabled" required></v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <v-flex xs10 offset-xs1 md6 offset-md3>
+                <v-text-field label="Email" v-model="FormPerfil.usrEmail" :rules="ReglaEmail" :disabled="disabled" required></v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <v-flex xs10 offset-xs1 md6 offset-md3>
+                <v-text-field label="Última visita" v-model="FormPerfil.usrUltimaVisita" disabled></v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <v-flex xs10 offset-xs1 md6 offset-md3>
+                <v-text-field label="Fecha de creación" v-model="FormPerfil.auCreadoEl" disabled></v-text-field>
+              </v-flex>
+            </v-layout>
+          <v-layout row>
+            <v-flex xs8 offset-xs4 md8 offset-md4>
+              <v-btn round color="primary" v-show="ButonEditar" dark @click="habilitarCampos">modificar</v-btn>
+              <v-btn round color="primary" v-show="!ButonEditar" dark @click="editarPerfil" :disabled="!validP">
+                guardar
+              </v-btn>
+              <v-btn round outline color="primary" v-show="!ButonEditar" @click="inhabilitarCampos">
+                cancelar
+              </v-btn>
+            </v-flex>
+          </v-layout>
+          </v-form>
+        </v-flex>
+        <v-flex xs12 sm12 md4>              
+            <v-flex xs12 offset-xs3 md12 offset-md1>
               <input type="hidden" v-model="FormPerfil.idUser">
-              <v-layout row>
-                <v-flex xs10 offset-xs1 md6 offset-md3>
-                  <v-text-field label="Login" v-model="FormPerfil.usrUserName" disabled></v-text-field>
-                </v-flex>
-              </v-layout>
-              <v-layout row>
-                <v-flex xs10 offset-xs1 md6 offset-md3>
-                  <v-text-field label="Nombres" v-model="FormPerfil.usrNombreFull" :rules="ReglaInput" :disabled="disabled" required></v-text-field>
-                </v-flex>
-              </v-layout>
-              <v-layout row>
-                <v-flex xs10 offset-xs1 md6 offset-md3>
-                  <v-text-field label="Email" v-model="FormPerfil.usrEmail" :rules="ReglaEmail" :disabled="disabled" required></v-text-field>
-                </v-flex>
-              </v-layout>
-              <v-layout row>
-                <v-flex xs10 offset-xs1 md6 offset-md3>
-                  <v-text-field label="Última visita" v-model="FormPerfil.usrUltimaVisita" disabled></v-text-field>
-                </v-flex>
-              </v-layout>
-              <v-layout row>
-                <v-flex xs10 offset-xs1 md6 offset-md3>
-                  <v-text-field label="Fecha de creación" v-model="FormPerfil.auCreadoEl" disabled></v-text-field>
-                </v-flex>
-              </v-layout>
-            <v-layout row>
-              <v-flex xs8 offset-xs4 md8 offset-md4>
-                <v-btn round color="primary" v-show="ButonEditar" dark @click="habilitarCampos">modificar</v-btn>
-                <v-btn round color="primary" v-show="!ButonEditar" dark @click="editarPerfil" :disabled="!validP">
-                  guardar
-                </v-btn>
-                <v-btn round outline color="primary" v-show="!ButonEditar" @click="inhabilitarCampos">
-                  cancelar
-                </v-btn>
-              </v-flex>
-            </v-layout>
-            </v-form>
-          </v-flex>
-          <v-flex xs12 sm12 md4>    
-            <v-layout row>
-              <v-flex xs12 offset-xs3 md12 offset-md1>    
-                <input type="hidden" v-model="FormPerfil.idUser">
-                <input type="hidden" v-model="FormPerfil.usrUrlimage">
-                <v-avatar size="120px" :tile="tile">
-                  <img class="avatar" :src='FormPerfil.image' alt="">
-                </v-avatar>
-              </v-flex>
-            </v-layout>
+              <input type="hidden" v-model="FormPerfil.usrUrlimage">
+              <v-avatar size="120px" :tile="tile">
+                <img class="avatar" :src='FormPerfil.image' alt="">
+              </v-avatar>
+            </v-flex>
             <p></p>
-            <v-layout row>
-              <v-flex xs8 offset-xs3 md12 offset-md1>
-                <input type="file" class="form-control" @change="onFileChange">
-              </v-flex>
-            </v-layout>
+            <v-flex xs12 offset-xs3 md12 offset-md1>
+              <input type="file" class="form-control" @change="onFileChange">
+            </v-flex>
             <p></p>
-            <v-layout row>
-              <v-flex xs12 offset-xs1 md12 offset-md1>
-                <v-btn round color="primary" dark @click="cargarImagen">cargar</v-btn>
-                <v-btn round outline color="primary" @click="borrarImagen">eliminar</v-btn>
-              </v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
-      </v-flex>
+            <v-flex xs12 offset-xs3 md12 offset-md1>
+              <v-btn round color="primary" dark @click="cargarImagen">cargar</v-btn>
+              <v-btn round outline color="primary" @click="borrarImagen">eliminar</v-btn>
+            </v-flex>
+        </v-flex>
+      </v-layout>
     </v-card>
   </v-flex>
 </template>

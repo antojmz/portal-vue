@@ -1,28 +1,26 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+window.onbeforeunload = function (e) {
+    document.getElementById("divSpiner").style.display="none"; 
+    document.getElementById("divApp").style.display="block"; 
+}
 require('./bootstrap');
 // window.Vue = require('vue');
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import axios from 'axios'
+import moment from 'moment' 
 import jquery from 'jquery'
 import toastr from 'toastr'
-import Vue from 'vue'
-import axios from 'axios'
-import moment from 'moment'
- 
-import Vuetify from 'vuetify'
 Vue.use(Vuetify)
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-Vue.component('idea', require('./components/Idea.vue'));
 Vue.component('usuario', require('./components/Usuario.vue'));
 Vue.component('password', require('./components/Cambio_pass.vue'));
 Vue.component('perfil', require('./components/Perfil.vue'));
@@ -34,6 +32,8 @@ const app = new Vue({
       window.addEventListener('keydown', function(e) {if(e.keyCode == 116){this.salir=1;}});
     },
     mounted(){
+      document.getElementById("divSpiner").style.display="none"; 
+      document.getElementById("divApp").style.display="block";
       this.CerrarSesion()
     },
     data:{

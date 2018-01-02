@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" >
+<html lang="{{ app()->getLocale() }}">
 	<!-- begin::Head -->
 	<head>
 	    @php
@@ -19,8 +19,15 @@
 		<script src="{{ asset('js/utils/utils.js') }}"></script>
 	</head>
 	<body>
-		<div id="divAccesos">
-			<v-app id="inspire">
+		<div id="divAccesos" style="position:relative;z-index:1;">
+			<div id="DivSpiner" style="position:absolute;z-index:3;">
+				<v-container fluid fill-height>
+					<v-layout justify-center align-center>
+						<v-progress-circular indeterminate color="indigo lighten-4"></v-progress-circular>
+					</v-layout>
+				</v-container>
+			</div>				
+			<v-app id="DivAccesos" style="display:none;position:relative;z-index:2;">
 				<v-toolbar color="indigo" dark fixed app>
 					<v-toolbar-title>
 						Portal de Proveedores
@@ -36,50 +43,35 @@
 							        	<img class="avatar" src="{{ asset($avatar) }}" alt="">
 							        </v-avatar>
                           		</v-btn>
-		                        <v-list style="background-color:#4F34B2">
-	                        		<br>
-	                        		<h2 style="color:white" class="text-xs-center">
-	                        			@php echo Auth::user()->usrNombreFull; @endphp
-	                        		</h2>
-	                        		<h4 style="color:white" class="text-xs-center">
-										@php echo Auth::user()->usrEmail; @endphp
-	                        		</h4>
-	                        		<br>
-		                        </v-list>
-		                        <v-list>
-                					@php
-										$nroPerfiles = Session::get('nroPerfiles');
-									@endphp
-									@if (isset($nroPerfiles))
-										@if ($nroPerfiles>1)
-											<v-list-tile href="{{ route('accesos') }}">
-				                                <v-list-tile-action>
-							                		<v-icon>autorenew</v-icon>
-							              		</v-list-tile-action>
-				                                <v-list-tile-title>
-				                                	<span>Cambio de acceso</span>
-				                                </v-list-tile-title>
-				                            </v-list-tile>
-										@endif
-									@endif
-		                        	<v-list-tile href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-		                                <v-list-tile-action>
-					                		<v-icon>input</v-icon>
-					              		</v-list-tile-action>
-		                                <v-list-tile-title>
-		                                	<span>Salir</span>
-		                                </v-list-tile-title>
-		                            </v-list-tile>
-		                        </v-list>
+		                        <div style="width:250px;">
+			                        <v-list style="background-color:#7986CB;">
+		                        		<h2 style="color:white" class="text-xs-center">
+		                        			@php echo Auth::user()->usrNombreFull; @endphp
+		                        		</h2>
+		                        		<h4 style="color:white" class="text-xs-center">
+											@php echo Auth::user()->usrEmail; @endphp
+		                        		</h4>
+			                        </v-list>
+			                        <v-list>
+			                        	<v-list-tile href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+			                                <v-list-tile-action>
+						                		<v-icon>input</v-icon>
+						              		</v-list-tile-action>
+			                                <v-list-tile-title>
+			                                	<span>Salir</span>
+			                                </v-list-tile-title>
+			                            </v-list-tile>
+			                        </v-list>
+		                        </div>
 	                        </v-menu>
 				</v-toolbar>
 				<v-content>
 					<v-container row>
-						<v-layout justify-center align-center md10>
+						<v-layout justify-center>
 				            <v-card>
 				              <v-card-title>
 				     			<h3 class="text-xs-center">
-				    				Listado de accesos activos
+				    				Listado de accesos disponibles
 				     			</h3>
 				              </v-card-title>
 				              <v-data-table :headers="headers" :items="listAccesos" v-bind:search="search">
@@ -100,7 +92,7 @@
 				</v-content>
 				<v-footer color="indigo" app>
 					<span class="white--text">&copy; 2017</span>
-				</v-footer>
+				</v-footer>			
 			</v-app>
 		</div>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

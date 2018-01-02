@@ -2,7 +2,6 @@
 @section('content')
 <v-layout justify-center align-center>
 	<v-flex xs12 sm12 md4 xl4>
-        <br>
         <v-card style="background-color: white;">
             <div class="divForm">
 				<v-form v-model="validLogin" ref="formLogin" lazy-validation>
