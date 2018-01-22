@@ -13,6 +13,8 @@ require('./bootstrap');
 import Vue from 'vue'
 import axios from 'axios'
 import Vuetify from 'vuetify'
+import jquery from 'jquery'
+import toastr from 'toastr'
 Vue.use(Vuetify)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -50,18 +52,6 @@ var vu = new Vue({
             }).catch(error => {
                     toastr.error("Contacte al personal informático", "Error!");
             });
-        },
-        desactivarPerfil:function(row){
-            axios.post(rutaAP,row).then(response =>{
-                if(response.status=="200"){
-                    toastr.success('Proceso con exito.', "Procesado!");
-                    this.listPerfiles=response.data.v_perfiles;
-                }else{
-                    toastr.error("Comuniquese con el personal de sopore técnico", "Error!");
-                }
-            }).catch(error => {
-                    toastr.error("Contacte al personal informático", "Error!");
-            });
-        },
+        }
     }
 });

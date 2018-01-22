@@ -143,7 +143,7 @@
           <input type="hidden" v-model="FormUsuario._token" value="{!! csrf_token() !!}">
           <v-layout row>
             <v-flex xs5 offset-xs4>
-              <v-text-field label="Login" v-model="FormUsuario.usrUserName" :rules="ReglaInput" mask="########-#" v-bind:return-masked-value="true" required></v-text-field>
+              <v-text-field label="Login" v-model="FormUsuario.usrUserName" :rules="ReglaInput" mask="########-#" v-bind:return-masked-value="true" vrequired></v-text-field>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -212,8 +212,10 @@
 <script>
   import toastr from 'toastr'
   export default {
+    props: ['data'],
     data () {
       return {
+        maskvalue:true,
         valid: false,
         validP: false,
         name: '',
@@ -262,7 +264,7 @@
         comboPerfiles:[],
         comboEstados:[],
         listPerfiles:[],
-        //datatabla
+        //Tabla usuarios
         search: '',
         pagination: {},
         headers: [
@@ -277,7 +279,7 @@
         {text: 'Acciones'}
         ],
         listUsuarios: [],
-        // Perfiles
+        // tabla Perfiles
         searchP: '',
         // pagination: {},
         headersP: [
@@ -293,15 +295,10 @@
       this.getUsuarios();
     },
     methods:{
-      getUsuarios:function(){
-        var urlUsuarios = 'usuariosD';
-        axios.get(urlUsuarios).then(response=>{
-          if(response.status=="200"){
-            this.comboEstados=response.data.v_estados;
-            this.comboPerfiles=response.data.v_perfiles;
-            this.listUsuarios=response.data.v_usuarios;
-          }
-        });
+      getUsuarios: function(){
+        this.comboEstados=this.data.v_estados;
+        this.comboPerfiles=this.data.v_perfiles;
+        this.listUsuarios=this.data.v_usuarios;
       },
       toggleF:function(){
         this.$refs.form.reset()
@@ -309,8 +306,6 @@
         $("#divSpanPerfiles").hide();
         $("#divConsulta").hide();
         $("#divestado").show();
-        // this.toggleForm==false ? this.toggleForm=true : this.toggleForm=false;
-        // this.toggleCon=false;
         this.FormUsuario.idUser='';
         this.FormUsuario.usrUserName='';
         this.FormUsuario.usrNombreFull='';
@@ -319,17 +314,13 @@
         this.FormUsuario._token='';
       },
       togglePf:function(){
-        // this.FormPerfil.idPerfil = '';
         $(".divPerfiles").toggle();
-        // this.togglePerf==false ? this.togglePerf=true : this.togglePerf=false;
       },
       editarUsuario:function(row){
         $(".divTabla").toggle();
         $("#divSpanPerfiles").show();
         $("#divConsulta").show();
         $("#divestado").hide();
-        // this.toggleF();
-        // this.toggleCon=true;
         if(row.des_Perfil!=null){
           var res = row.des_Perfil.split(",");
           res.length>1 ? this.FormUsuario.des_perfiles="Perfiles" : this.FormUsuario.des_perfiles="Perfil";

@@ -1,4 +1,4 @@
 @extends('menu.index')
 @section('content')
-<perfil></perfil>
+<perfil :data="{{ json_encode($v_datos) }}"></perfil>
 @endsection

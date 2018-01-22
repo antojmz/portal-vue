@@ -51,28 +51,15 @@ class UsuarioController extends Controller
 
     //Pantalla de registro de usuario
     protected function getUsuarios(){
-        // $p = Session::get('perfiles');
-        // $model= new User();
-        // $data['v_usuarios'] = $model->listUsuario();
-        // $data['v_perfiles'] = $model->listPerfiles();
-        // $data['v_estados'] = $model->listEstados();
-        // $result["perfil"] = $p["idPerfil"];
-        // $data['v_perfil']=json_encode($result);
-        // return View::make('usuarios.usuarios',$data);
-        return View::make('usuarios.usuarios');
-    }
-
-    
-    //Datos de registro de usuario
-    protected function getUsuariosd(){
         $p = Session::get('perfiles');
         $model= new User();
-        $data['v_usuarios'] = $model->listUsuario();
-        $data['v_perfiles'] = $model->listPerfiles();
-        $data['v_estados'] = $model->listEstados();
+        $data['data']['v_usuarios'] = $model->listUsuario();
+        $data['data']['v_perfiles'] = $model->listPerfiles();
+        $data['data']['v_estados'] = $model->listEstados();
         $result["perfil"] = $p["idPerfil"];
-        $data['v_perfil']=json_encode($result);
-        return $data;
+        $data['data']['v_perfil']=json_encode($result);
+        return View::make('usuarios.usuarios',$data);
+        // return View::make('usuarios.usuarios');
     }
 
     // Registrar un nuevo usuario o actualizar datos (Administrador)
@@ -80,7 +67,6 @@ class UsuarioController extends Controller
         $p = Session::get('perfiles');
         $datos = $request->all();
         $datos['idEmpresa']=0; 
-        log::info($datos);
         // caso Administrador registra Usuario
         if ($p['idPerfil']==1){$datos['caso']=1;}
         // caso Cliente registra Usuario cliente
@@ -117,12 +103,6 @@ class UsuarioController extends Controller
         $data['v_datos'] = Auth::user();
         return View::make('perfiles.perfiles',$data);
     }
-    protected function getPerfild (){
-        $data = Auth::user();
-        return $data;
-    }
-
-    
 
     // Actualizacion de datos por el usuario actual
     protected function postPerfil (Request $request){

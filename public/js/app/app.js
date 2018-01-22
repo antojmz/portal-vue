@@ -4603,7 +4603,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)(module)))
 
 /***/ }),
 /* 1 */
@@ -4944,106 +4944,6 @@ module.exports = g;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(20);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(8);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(8);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15303,6 +15203,106 @@ return jQuery;
 
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(1);
+var normalizeHeaderName = __webpack_require__(20);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(8);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(8);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+
+/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15768,34 +15768,6 @@ module.exports = Cancel;
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -15812,7 +15784,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
  */
 /* global define */
 (function (define) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(4)], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(3)], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
         return (function () {
             var $container;
             var listener;
@@ -16272,6 +16244,34 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -16285,7 +16285,7 @@ window._ = __webpack_require__(15);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(4);
+  window.$ = window.jQuery = __webpack_require__(3);
 
   __webpack_require__(16);
 } catch (e) {}
@@ -33419,7 +33419,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(12)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(13)(module)))
 
 /***/ }),
 /* 16 */
@@ -35814,7 +35814,7 @@ if (typeof jQuery === 'undefined') {
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(6);
 var Axios = __webpack_require__(19);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(4);
 
 /**
  * Create an instance of Axios
@@ -35897,7 +35897,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(4);
 var utils = __webpack_require__(1);
 var InterceptorManager = __webpack_require__(28);
 var dispatchRequest = __webpack_require__(29);
@@ -36438,7 +36438,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(30);
 var isCancel = __webpack_require__(10);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(4);
 var isAbsoluteURL = __webpack_require__(31);
 var combineURLs = __webpack_require__(32);
 
@@ -76598,9 +76598,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_toastr__);
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -77381,7 +77381,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_toastr__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -77599,10 +77599,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['data'],
   data: function data() {
     var _ref;
 
     return _ref = {
+      maskvalue: true,
       valid: false,
       validP: false,
       name: '',
@@ -77660,16 +77662,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     getUsuarios: function getUsuarios() {
-      var _this = this;
-
-      var urlUsuarios = 'usuariosD';
-      axios.get(urlUsuarios).then(function (response) {
-        if (response.status == "200") {
-          _this.comboEstados = response.data.v_estados;
-          _this.comboPerfiles = response.data.v_perfiles;
-          _this.listUsuarios = response.data.v_usuarios;
-        }
-      });
+      this.comboEstados = this.data.v_estados;
+      this.comboPerfiles = this.data.v_perfiles;
+      this.listUsuarios = this.data.v_usuarios;
     },
     toggleF: function toggleF() {
       this.$refs.form.reset();
@@ -77677,8 +77672,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $("#divSpanPerfiles").hide();
       $("#divConsulta").hide();
       $("#divestado").show();
-      // this.toggleForm==false ? this.toggleForm=true : this.toggleForm=false;
-      // this.toggleCon=false;
       this.FormUsuario.idUser = '';
       this.FormUsuario.usrUserName = '';
       this.FormUsuario.usrNombreFull = '';
@@ -77687,17 +77680,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.FormUsuario._token = '';
     },
     togglePf: function togglePf() {
-      // this.FormPerfil.idPerfil = '';
       $(".divPerfiles").toggle();
-      // this.togglePerf==false ? this.togglePerf=true : this.togglePerf=false;
     },
     editarUsuario: function editarUsuario(row) {
       $(".divTabla").toggle();
       $("#divSpanPerfiles").show();
       $("#divConsulta").show();
       $("#divestado").hide();
-      // this.toggleF();
-      // this.toggleCon=true;
       if (row.des_Perfil != null) {
         var res = row.des_Perfil.split(",");
         res.length > 1 ? this.FormUsuario.des_perfiles = "Perfiles" : this.FormUsuario.des_perfiles = "Perfil";
@@ -77742,13 +77731,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     desactivarUsuario: function desactivarUsuario(row) {
-      var _this2 = this;
+      var _this = this;
 
       var rutaA = "activar";
       axios.post(rutaA, row).then(function (response) {
         if (response.status == "200") {
           __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.success('Proceso con exito.', "Procesado!");
-          _this2.listUsuarios = response.data.v_usuarios;
+          _this.listUsuarios = response.data.v_usuarios;
         } else {
           __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.error("Comuniquese con el personal de sopore técnico", "Error!");
         }
@@ -77757,13 +77746,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     desactivarPerfil: function desactivarPerfil(row) {
-      var _this3 = this;
+      var _this2 = this;
 
       var rutaAP = "activarP";
       axios.post(rutaAP, row).then(function (response) {
         if (response.status == "200") {
           __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.success('Proceso con exito.', "Procesado!");
-          _this3.listPerfiles = response.data.v_perfiles;
+          _this2.listPerfiles = response.data.v_perfiles;
         } else {
           __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.error("Comuniquese con el personal de sopore técnico", "Error!");
         }
@@ -77772,17 +77761,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     administrarperfiles: function administrarperfiles(row) {
-      var _this4 = this;
+      var _this3 = this;
 
       $(".divPerfiles").toggle();
       var rutaP = 'perfiles';
       axios.get(rutaP, { params: row }).then(function (response) {
         if (response.status == "200") {
-          _this4.FormPerfil.idUser = row.idUser;
+          _this3.FormPerfil.idUser = row.idUser;
           if (response.data.v_perfiles.length > 0) {
-            _this4.listPerfiles = response.data.v_perfiles;
+            _this3.listPerfiles = response.data.v_perfiles;
           } else {
-            _this4.listPerfiles = [];
+            _this3.listPerfiles = [];
             __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.warning("Este usuario no tiene perfiles asignados aun.", "Aviso!");
           }
         } else {
@@ -77804,7 +77793,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     regPerfil: function regPerfil() {
-      var _this5 = this;
+      var _this4 = this;
 
       var rutaP = 'perfiles';
       if (this.$refs.formP.validate()) {
@@ -77814,8 +77803,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (res.code) {
               case "200":
                 __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.success('Proceso con exito.', "Procesado!");
-                _this5.listPerfiles = response.data.v_perfiles;
-                _this5.FormPerfil.idPerfil = '';
+                _this4.listPerfiles = response.data.v_perfiles;
+                _this4.FormPerfil.idPerfil = '';
                 break;
               case "-2":
                 __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.warning(res.des_code, "Aviso!");
@@ -77830,7 +77819,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     regUsuario: function regUsuario() {
-      var _this6 = this;
+      var _this5 = this;
 
       if (this.$refs.form.validate()) {
         var ruta = "usuarios";
@@ -77841,8 +77830,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (res.code) {
               case "200":
                 __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.success('Proceso con exito.', "Procesado!");
-                _this6.listUsuarios = response.data.v_usuarios;
-                _this6.toggleF();
+                _this5.listUsuarios = response.data.v_usuarios;
+                _this5.toggleF();
                 break;
               case "-2":
                 __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.warning(res.des_code, "Aviso!");
@@ -78539,7 +78528,7 @@ var render = function() {
                           rules: _vm.ReglaInput,
                           mask: "########-#",
                           "return-masked-value": true,
-                          required: ""
+                          vrequired: ""
                         },
                         model: {
                           value: _vm.FormUsuario.usrUserName,
@@ -78940,7 +78929,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_toastr__);
 //
 //
@@ -79256,7 +79245,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
@@ -79342,6 +79331,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['data'],
   data: function data() {
     return {
       validP: true,
@@ -79381,42 +79371,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     getPerfil: function getPerfil() {
-      var _this = this;
-
-      var ruta = "/admin/perfilD";
-      axios.get(ruta).then(function (response) {
-        if (response.status == "200") {
-          _this.FormPerfil.idUser = response.data.idUser;
-          _this.FormPerfil.usrUserName = response.data.usrUserName;
-          _this.FormPerfil.usrNombreFull = response.data.usrNombreFull;
-          _this.FormPerfil.usrNombreFull2 = response.data.usrNombreFull;
-          _this.FormPerfil.usrEmail = response.data.usrEmail;
-          _this.FormPerfil.usrEmail2 = response.data.usrEmail;
-          var visita = __WEBPACK_IMPORTED_MODULE_1_moment___default()(response.data.usrUltimaVisita, 'YYYY-MM-DD HH:mm:ss', true).format("DD-MM-YYYY");
-          _this.FormPerfil.usrUltimaVisita = visita;
-          var creadoel = __WEBPACK_IMPORTED_MODULE_1_moment___default()(response.data.auCreadoEl, 'YYYY-MM-DD HH:mm:ss', true).format("DD-MM-YYYY");
-          _this.FormPerfil.auCreadoEl = creadoel;
-          var img = response.data.usrUrlimage;
-          if (response.data.usrUrlimage != null) {
-            if (img.length > 5) {
-              _this.FormPerfil.usrUrlimage = response.data.usrUrlimage;
-              _this.FormPerfil.image = response.data.usrUrlimage;
-            }
-          }
+      this.FormPerfil.idUser = this.data.idUser;
+      this.FormPerfil.usrUserName = this.data.usrUserName;
+      this.FormPerfil.usrNombreFull = this.data.usrNombreFull;
+      this.FormPerfil.usrNombreFull2 = this.data.usrNombreFull;
+      this.FormPerfil.usrEmail = this.data.usrEmail;
+      this.FormPerfil.usrEmail2 = this.data.usrEmail;
+      var visita = __WEBPACK_IMPORTED_MODULE_1_moment___default()(this.data.usrUltimaVisita, 'YYYY-MM-DD HH:mm:ss', true).format("DD-MM-YYYY");
+      this.FormPerfil.usrUltimaVisita = visita;
+      var creadoel = __WEBPACK_IMPORTED_MODULE_1_moment___default()(this.data.auCreadoEl, 'YYYY-MM-DD HH:mm:ss', true).format("DD-MM-YYYY");
+      this.FormPerfil.auCreadoEl = creadoel;
+      var img = this.data.usrUrlimage;
+      if (this.data.usrUrlimage != null) {
+        if (img.length > 5) {
+          this.FormPerfil.usrUrlimage = this.data.usrUrlimage;
+          this.FormPerfil.image = this.data.usrUrlimage;
         }
-      }).catch(function (error) {
-        __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.error("Contacte al personal informático", "Error!");
-      });
+      }
     },
     editarPerfil: function editarPerfil() {
-      var _this2 = this;
+      var _this = this;
 
       if (this.$refs.formP.validate()) {
         var ruta = "/admin/perfil";
         axios.post(ruta, this.FormPerfil).then(function (response) {
           if (response.status == "200") {
-            _this2.ButonEditar = true;
-            _this2.disabled = true;
+            _this.ButonEditar = true;
+            _this.disabled = true;
             __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.success('Proceso con exito.', "Procesado!");
           } else {
             __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.error("Comuniquese con el personal de sopore técnico", "Error!");
@@ -79432,7 +79413,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     cargarImagen: function cargarImagen() {
-      var _this3 = this;
+      var _this2 = this;
 
       var form = new FormData();
       form.append('idUser', this.FormPerfil.idUser);
@@ -79444,8 +79425,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           switch (response.data.code) {
             case "200":
               __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.success('Proceso con exito.', "Procesado!");
-              _this3.FormPerfil.image = response.data.des_code;
-              _this3.FormPerfil.usrUrlimage = response.data.des_code;
+              _this2.FormPerfil.image = response.data.des_code;
+              _this2.FormPerfil.usrUrlimage = response.data.des_code;
               $('.gavatar').attr('src', response.data.des_code) + '?' + Math.random();
               $('.avatar').attr('src', response.data.des_code) + '?' + Math.random();
               break;
@@ -79462,7 +79443,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     borrarImagen: function borrarImagen() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (this.FormPerfil.usrUrlimage == null) {
         __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.warning("No posees imagen de perfíl", "Aviso!");
@@ -79472,7 +79453,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           if (response.status == "200") {
             switch (response.data.code) {
               case "204":
-                _this4.FormPerfil.usrUrlimage = null;
+                _this3.FormPerfil.usrUrlimage = null;
                 $('.gavatar').attr('src', '/img/default.png') + '?' + Math.random();
                 $('.avatar').attr('src', '/img/default.png') + '?' + Math.random();
                 __WEBPACK_IMPORTED_MODULE_0_toastr___default.a.success('Proceso con exito.', "Procesado!");

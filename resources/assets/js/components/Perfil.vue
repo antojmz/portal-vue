@@ -80,6 +80,7 @@
   import toastr from 'toastr'
   import moment from 'moment'
   export default {
+    props: ['data'],
     data () {
       return {
         validP: true,
@@ -116,30 +117,23 @@
     },
     methods:{
       getPerfil:function(){
-        var ruta = "/admin/perfilD";
-        axios.get(ruta).then(response=>{
-          if(response.status=="200"){
-            this.FormPerfil.idUser=response.data.idUser;
-            this.FormPerfil.usrUserName=response.data.usrUserName;
-            this.FormPerfil.usrNombreFull=response.data.usrNombreFull;
-            this.FormPerfil.usrNombreFull2=response.data.usrNombreFull;
-            this.FormPerfil.usrEmail=response.data.usrEmail;
-            this.FormPerfil.usrEmail2=response.data.usrEmail;
-            var visita = moment(response.data.usrUltimaVisita, 'YYYY-MM-DD HH:mm:ss',true).format("DD-MM-YYYY");
-            this.FormPerfil.usrUltimaVisita=visita;
-            var creadoel = moment(response.data.auCreadoEl, 'YYYY-MM-DD HH:mm:ss',true).format("DD-MM-YYYY");
-            this.FormPerfil.auCreadoEl=creadoel;
-            var img = response.data.usrUrlimage
-            if (response.data.usrUrlimage!=null){
-              if (img.length>5) {
-                this.FormPerfil.usrUrlimage=response.data.usrUrlimage;
-                this.FormPerfil.image=response.data.usrUrlimage;
-              }
-            }
+        this.FormPerfil.idUser=this.data.idUser;
+        this.FormPerfil.usrUserName=this.data.usrUserName;
+        this.FormPerfil.usrNombreFull=this.data.usrNombreFull;
+        this.FormPerfil.usrNombreFull2=this.data.usrNombreFull;
+        this.FormPerfil.usrEmail=this.data.usrEmail;
+        this.FormPerfil.usrEmail2=this.data.usrEmail;
+        var visita = moment(this.data.usrUltimaVisita, 'YYYY-MM-DD HH:mm:ss',true).format("DD-MM-YYYY");
+        this.FormPerfil.usrUltimaVisita=visita;
+        var creadoel = moment(this.data.auCreadoEl, 'YYYY-MM-DD HH:mm:ss',true).format("DD-MM-YYYY");
+        this.FormPerfil.auCreadoEl=creadoel;
+        var img = this.data.usrUrlimage
+        if (this.data.usrUrlimage!=null){
+          if (img.length>5) {
+            this.FormPerfil.usrUrlimage=this.data.usrUrlimage;
+            this.FormPerfil.image=this.data.usrUrlimage;
           }
-        }).catch(error => {
-          toastr.error("Contacte al personal informático", "Error!");
-        });
+        }
       },
       editarPerfil:function(){
         if (this.$refs.formP.validate()){
